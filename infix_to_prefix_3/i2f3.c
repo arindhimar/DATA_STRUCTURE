@@ -50,9 +50,12 @@ int main()
             push(ch);
             break;
             case ')':
-            while(stack[top]!='(')
+            temp=pop();
+            while(temp!='(')
             {
-                postfix[j++]=pop();
+                postfix[j]=temp;
+                j++;
+                temp=pop();
             }
             break;
             case '+':
@@ -108,8 +111,6 @@ int main()
        // printf("\nl");
         postfix[j++]=pop();
     }
-
-    j--;
 
     postfix[j]='\0';
 
