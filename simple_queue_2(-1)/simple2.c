@@ -42,7 +42,7 @@ void enque()
 
 void deque()
 {
-    if(front==N)
+    if(front==-1)
     {
         printf("\nQUEUE IS EMPTY");
     }

@@ -53,8 +53,8 @@ int main()
             temp=pop();
             while(temp!='(')
             {
-                postfix[j]=temp;
-                j++;
+                postfix[j++]=temp;
+                //j++;
                 temp=pop();
             }
             break;
