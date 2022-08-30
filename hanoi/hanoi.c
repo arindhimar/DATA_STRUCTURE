@@ -1,6 +1,6 @@
 /*
 this code is written by arin_dhimar
-date:31/08/2022
+date:21/08/2022
 */
 
 #include<stdio.h>
