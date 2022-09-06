@@ -120,10 +120,9 @@ void dispr()
 
 void sort()
 {
-    printf("\n");
     temp=ma;
 
-    if(temp==NULL)
+    if(first==NULL)
     {
         printf("\nLIST IS EMPTY!");
     }
@@ -244,7 +243,7 @@ void insertpos()
     printf("\nENTER POSITION TO INSERT      ");
     scanf("%d",&pos);
 
-    if(pos==0||pos>i+1)
+    if(pos<=0||pos>i+1)
     {
         printf("\nINVALID POSITION!!");
         return;
