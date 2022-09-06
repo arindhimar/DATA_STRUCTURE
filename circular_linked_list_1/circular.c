@@ -63,6 +63,38 @@ void dispf()
     }
 }
 
+void search()
+{
+        temp=first;
+
+    if(temp==NULL)
+    {
+        printf("\nLIST IS EMPTY!");
+    }
+    else
+    {
+        int data,ck=0;
+
+        printf("\nENTER DATA TO SEARCH      ");
+        scanf("%d",&data);
+
+        do
+        {
+            if(data==temp->value)
+            {
+                printf("\nVALUE IS FOUND AT %u",temp);
+                ck=1;
+            }
+            temp=temp->next;
+        }while(temp!=first);
+
+        if(ck==0)
+        {
+            printf("\nNOT FOUND!!");
+        }
+    }
+}
+
 void dispr()
 {
     printf("\n");
@@ -83,6 +115,32 @@ void dispr()
             printf("\t%d",temp->value);
             temp=temp->next;
         }while(temp!=last);
+    }
+}
+
+void sort()
+{
+    printf("\n");
+    temp=ma;
+
+    if(temp==NULL)
+    {
+        printf("\nLIST IS EMPTY!");
+    }
+    else
+    {
+        for(c=first;c!=last;c=c->next)
+        {
+            for(p=c->next;p!=last;p=p->next)
+            {
+                if(c->value>p->value)
+                {
+                    temp->value=c->value;
+                    c->value=p->value;
+                    p->value=temp->value;
+                }
+            }
+        }
     }
 }
 
@@ -309,8 +367,10 @@ int main()
             deletelast();
             break;
         case 7:
+            search();
             break;
         case 8:
+            sort();
             break;
         case 9:
             dispf();
