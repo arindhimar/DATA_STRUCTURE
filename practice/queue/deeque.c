@@ -8,9 +8,10 @@ void menu()
 {
     printf("\n\tMENU PANEL");
     printf("\n 1 - INSERT ");
-    printf("\n 2 - DELETE ");
-    printf("\n 3 - DISPLAY ");
-    printf("\n 4 - EXIT ");
+    printf("\n 2 - DELETEF ");
+    printf("\n 3 - DELETER ");
+    printf("\n 4 - DISPLAY ");
+    printf("\n 5 - EXIT ");
 }
 
 void insert()
@@ -34,7 +35,7 @@ void insert()
     printf("%d",f);
 }
 
-void del()
+void delf()
 {
     if(f==-1&&r==-1)
     {
@@ -48,6 +49,23 @@ void del()
     else
     {
         printf("DELETED ELEMENT IS %d",queue[f++]);
+    }
+}
+
+void delr()
+{
+    if(f==-1&&r==-1)
+    {
+        printf("\nEMPTY!");
+    }
+    else if(f==r)
+    {
+        printf("DELETED ELEMENT IS %d",queue[r]);
+        f=r=-1;
+    }
+    else
+    {
+        printf("DELETED ELEMENT IS %d",queue[r--]);
     }
 }
 
@@ -81,12 +99,15 @@ int main()
         insert(); 
         break;
         case 2:
-        del();
+        delf();
         break;
         case 3:
-        disp();
+        delr();
         break;
         case 4:
+        disp();
+        break;
+        case 5:
         exit(0);
         break;
         default:
@@ -94,7 +115,7 @@ int main()
             break;
         }
 
-    } while (opt!=4);
+    } while (opt!=5);
     
     return 0;
 }

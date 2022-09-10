@@ -15,7 +15,7 @@ void menu()
 
 void insert()
 {
-    if(r==N-1)
+    if((r+1)%N==f)
     {
         printf("\nFULL!!");
     }
@@ -27,11 +27,12 @@ void insert()
     }
     else
     {
+        r=(r+1)%N;
         printf("\nENTER VALUE TO INSERT     ");
-        scanf("%d",&queue[++r]);
+        scanf("%d",&queue[r]);
     }
-    printf("%d",r);
-    printf("%d",f);
+    // printf("%d",r);
+    // printf("%d",f);
 }
 
 void del()
@@ -47,21 +48,33 @@ void del()
     }
     else
     {
-        printf("DELETED ELEMENT IS %d",queue[f++]);
+        printf("DELETED ELEMENT IS %d",queue[f]);
+        f=(f+1)%N;
     }
 }
 
 void disp()
 {
-    if(r==-1)
+    if(r==-1&&f==-1)
     {
         printf("\nEMPTY!!");
     }
-    else
+    else 
     {
-        for(int i=f;i<=r;i++)
+        if(f<=r)
         {
-            printf("\t%d",queue[i]);
+            for(int i=f;i<=r;i++){
+                printf("\t%d",queue[i]);
+            }
+        }
+        else
+        {
+            for(int i=0;i<=r;i++){
+                printf("\t%d",queue[i]);
+            }
+            for(int i=f;i<N;i++){
+                printf("\t%d",queue[i]);
+            }
         }
     }
 }
