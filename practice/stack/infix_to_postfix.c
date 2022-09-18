@@ -1,7 +1,7 @@
 #include<stdio.h>
-#define N 5
+#define N 30
 
-char infix[5],postfix[5],stack[5];
+char infix[N],postfix[N],stack[N];
 int pos=-1;
 char pop()
 {
@@ -30,12 +30,10 @@ void push(char ch)
 int main()
 {
     printf("\nENTER INFIX       ");
-    scanf("%s",infix);
+    scanf("%s",&infix);
 
     char ch,temp;
     int i=0,j=0;
-
-    ch=infix[i];
 
     while (infix[i]!='\0')
     {
@@ -49,13 +47,17 @@ int main()
             temp=pop();
             while(temp!='(')
             {
+
                 postfix[j++]=temp;
                 temp=pop();
             }
             break;
+
             case '+':
+            
             while(stack[pos]=='+'||stack[pos]=='-'||stack[pos]=='*'||stack[pos]=='/')
             {
+
                 postfix[j++]=pop();
             }
             push(ch);
@@ -87,6 +89,7 @@ int main()
 
             default:
             postfix[j++]=ch;
+            break;
         }
         
         i++;
@@ -94,7 +97,7 @@ int main()
         
     }
 
-    while(stack[pos]!='\0')
+    while(pos!=-1)
     {
         postfix[j++]=pop();
     }
