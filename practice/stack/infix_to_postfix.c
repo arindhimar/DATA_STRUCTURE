@@ -106,10 +106,5 @@ int main()
 
     printf("\nPOSFIX = %s",postfix);
     
-
-
-
-
-
     return 0;
 }
