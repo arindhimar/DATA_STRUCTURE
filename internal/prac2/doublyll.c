@@ -5,10 +5,8 @@
 struct node
 {
     int value;
-    struct node *next;  
-}*f=NULL,*l=NULL,*p,*c,*temp,*nn;
-
-static int pos=0;
+    struct node *prev,*next;
+}*f=NULL,*l=NULL,*p,*c,*temp;
 
 void menu()
 {
@@ -21,19 +19,19 @@ void menu()
     printf("\n6 - Delete By Position");
     printf("\n7 - Search");
     printf("\n8 - Sort");
-    printf("\n9 -  Display");
-    printf("\n10 - Exit");
-
+    printf("\n9 - Display From First");
+    printf("\n10 - Display From Last");
+    printf("\n11 - Exit");
 }
-
-
+static int pos=0;
 
 void insertfirst()
 {
-    temp=ma;
     pos=pos+1;
+    temp=ma;
     printf("\nEnter value to insert     ");
     scanf("%d",&temp->value);
+    temp->prev=NULL;
     temp->next=NULL;
     if(f==NULL&&l==NULL)
     {
@@ -42,18 +40,21 @@ void insertfirst()
     else
     {
         temp->next=f;
+        f->prev=temp;
         f=temp;
     }
+
 }
 
 void insertlast()
 {
     pos=pos+1;
-    temp=ma;
-    printf("\nEnetr value to insert     ");
-    scanf("%d",&temp->value);
-    temp->next=NULL;
 
+    temp=ma;
+    printf("\nEnter value to insert     ");
+    scanf("%d",&temp->value);
+    temp->prev=NULL;
+    temp->next=NULL;
     if(f==NULL&&l==NULL)
     {
         f=l=temp;
@@ -61,6 +62,7 @@ void insertlast()
     else
     {
         l->next=temp;
+        temp->prev=l;
         l=temp;
     }
 
@@ -70,21 +72,16 @@ void insertbypos()
 {
     if(f==NULL&&l==NULL)
     {
-        printf("\nElement will be inserted to first position!!");
-        insertfirst();
+        printf("\nValue will be inserted at first place");
     }
     else
     {
         int x;
-        printf("\nEnter position to delete      " );
+        printf("\nEnter position to insert node ");
         scanf("%d",&x);
+
         if(x>0&&x<=pos+1)
         {
-            temp=ma;
-            printf("\nEnter value to Insert     ");
-            scanf("%d",&temp->value);
-            temp->next=NULL;
-
             if(x==1)
             {
                 insertfirst();
@@ -103,24 +100,44 @@ void insertbypos()
                     c=c->next;
                 }
 
-                p->next=temp;
+                temp=ma;
+                printf("\nEnter Value to insert     ");
+                scanf("%d",&temp->value);
+
                 temp->next=c;
+                temp->prev=c->prev;
+
+                c->prev=temp;
+                p->next=temp;
+
             }
         }
         else
         {
-            printf("\nInvalid position number!!");
+            printf("\nInvalid position ");
         }
-    }
 
+    }
+}
+
+void create()
+{
+    int x;
+    choice:
+    printf("\nEnter -1 to exit creation     ");
+    scanf("%d",&x);
+    while(x!=-1)
+    {
+        insertlast();
+        goto choice;
+    }
 }
 
 void disp()
 {
-    if(f==NULL&l==NULL)
+    if(f==NULL&&l==NULL)
     {
-        printf("\nEmpty!!");
-
+        printf("\nList is empty!");
     }
     else
     {
@@ -131,41 +148,27 @@ void disp()
     }
 }
 
-void creation()
-{
-    int q;
-    crt:
-    printf("\nEnter -1 to exit creation!!");
-    scanf("%d",&q);
-    while(q!=-1)
-    {
-        insertlast();
-        goto crt;
-    }
-}
-
 void delfirst()
 {
     if(f==NULL&&l==NULL)
     {
-        printf("\nList is Empty!!");
+        printf("\nList is empty!!");
     }
     else
     {
         pos=pos-1;
-        printf("\nDeleted Element Is %d",f->value);
-
+        printf("\nDeleted Element is %d",f->value);
         if(f==l)
         {
             free(f);
             f=l=NULL;
-            return;
         }
-
-        printf("\nDeleted Element Is %d",f->value);
-        temp=f;
-        f=f->next;
-        free(temp);
+        else
+        {
+            f=f->next;
+            free(f->prev);
+            f->prev=NULL;
+        }
     }
 }
 
@@ -173,7 +176,7 @@ void dellast()
 {
     if(f==NULL&&l==NULL)
     {
-        printf("\nEmpty!!");
+        printf("\nList is empty!!");
     }
     else
     {
@@ -183,17 +186,13 @@ void dellast()
         {
             free(f);
             f=l=NULL;
-            return;
         }
-        
-        for(c=f;c!=l;c=c->next)
+        else
         {
-            p=c;
+            l=l->prev;
+            free(l->next);
+            l->next=NULL;
         }
-
-        free(l);
-        l=p;
-        l->next=NULL;
     }
 }
 
@@ -206,10 +205,10 @@ void delbypos()
     else
     {
         int x;
-        printf("\nEnter position to delete        ");
+        printf("\nEnter position to delete      ");
         scanf("%d",&x);
 
-        if(x>0&&x<=pos+1)
+        if(x>0&&x<pos+1)
         {
             if(x==1)
             {
@@ -221,6 +220,7 @@ void delbypos()
             }
             else
             {
+                
                 pos=pos-1;
                 c=f;
                 for(int i=1;i<x;i++)
@@ -228,15 +228,29 @@ void delbypos()
                     p=c;
                     c=c->next;
                 }
-                printf("\nDeleted Element is %d",c->value);
+
+                printf("\nDeleted Value is %d",c->value);
 
                 p->next=c->next;
                 free(c);
             }
         }
-        else
-        printf("\nInvalid position number!!");
+    }
+}
 
+void disprev()
+{
+    if(f==NULL&&l==NULL)
+    {
+        printf("\nList is empty!!");
+
+    }
+    else
+    {
+        for(temp=l;temp!=NULL;temp=temp->prev)
+        {
+            printf("\t%d",temp->value);
+        }
     }
 }
 
@@ -293,15 +307,14 @@ void sort()
     }
 }
 
-
 int main()
 {
-    creation();
+    create();
     int opt;
     do
     {
         menu();
-        printf("\nSelect Menu Option        ");
+        printf("\nSelect Menu option        ");
         scanf("%d",&opt);
         switch(opt)
         {
@@ -333,8 +346,10 @@ int main()
             disp();
             break;
             case 10:
+            disprev();
+            break;
+            case 11:
             exit(0);
         }
-    }while(opt!=10);
-    return 0;
+    }while(opt!=11);
 }
