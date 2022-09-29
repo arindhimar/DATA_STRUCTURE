@@ -23,6 +23,7 @@ void menu()
     printf("\n8 - Sort");
     printf("\n9 -  Display");
     printf("\n10 - Exit");
+    printf("\n11 - Delete By Position From Last");
 
 }
 
@@ -240,6 +241,36 @@ void delbypos()
     }
 }
 
+void delbyposlast()
+{
+    if(f==NULL)
+    {
+        printf("\nEmpty!!");
+    }
+    else
+    {
+        int m;
+        printf("Enter pos");
+        scanf("%d",&m);
+
+        int n=pos-m;
+        printf("Res=%d",n);
+        c=f;
+        int i=1;
+        do
+        {
+            p=c;
+            c=c->next;
+        }while(i<=n);
+                printf("\nDeleted Element is %d",c->value);
+
+                p->next=c->next;
+                free(c);
+
+    }
+}
+
+
 void search()
 {
     if(f==NULL&&l==NULL)
@@ -334,6 +365,8 @@ int main()
             break;
             case 10:
             exit(0);
+            case 11:
+            delbyposlast();
         }
     }while(opt!=10);
     return 0;
