@@ -3,7 +3,7 @@
 #define N 4
 #define S 3
 
-char stack[N],queue[S];
+int stack[N],queue[S];
 int pos=-1,front=-1,rear=-1;
 
 
@@ -19,15 +19,15 @@ void menu()
 
 void push()
 {
-    char ch[1];
+    int x;
     if(pos==N-1)
     {
         printf("\nStack is Full!!");
         return;
     }
     printf("\nEnter char to push    ");
-    scanf("%s",ch);
-    stack[++pos]=ch[0];
+    scanf("%d",&x);
+    stack[++pos]=x;
 }
 
 void pop()
@@ -45,13 +45,11 @@ void pop()
     }
     if(front==-1&&rear==-1)
     {
-        printf("\nChar popped to Queue is %c",stack[pos]);
         front=rear=0;
         queue[rear]=stack[pos--];
     }
     else
     {
-        printf("\nChar popped to Queue is %c",stack[pos]);
         rear=(rear+1)%N;
         queue[rear]=stack[pos--];
     }
@@ -67,12 +65,12 @@ void disp()
     printf("\nStack : ");
     for(int i=0;i<=pos;i++)
     {
-        printf("\t%c",stack[i]);
+        printf("\t%d",stack[i]);
     }
     printf("\nQueue : ");
     for(int i=front;i<=rear;i++)
     {
-        printf("\t%c",queue[i]);
+        printf("\t%d",queue[i]);
     }
 }
 
