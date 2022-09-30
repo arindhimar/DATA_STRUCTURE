@@ -1,76 +1,57 @@
 #include<stdio.h>
-#include<stdlib.h>
-#define N 4
-#define S 3
+#define N 3
 
-int stack[N],queue[S];
-int pos=-1,front=-1,rear=-1;
-
-
+char stack[N];
+int top=-1;
 
 void menu()
 {
     printf("\nMenu Panel");
-    printf("\n 1 - PUSH");
-    printf("\n 2 - POP");
-    printf("\n 3 - DISPLAY");
-    printf("\n 4 - EXIT");
+    printf("\n1 - Push");
+    printf("\n2 - Pop");
+    printf("\n3 - Diplay");
+    printf("\n4 - Exit");
 }
 
 void push()
 {
-    int x;
-    if(pos==N-1)
+    if(top==N-1)
     {
-        printf("\nStack is Full!!");
-        return;
+        printf("\nFull!!");
     }
-    printf("\nEnter char to push    ");
-    scanf("%d",&x);
-    stack[++pos]=x;
+    else
+    {
+        top=top+1;
+        printf("\nEnter Value to Push       ");
+        scanf("%s",&stack[top]);
+    }
 }
 
 void pop()
 {
-    if((rear+1)%S==front)
+    if(top==-1)
     {
-        printf("\nQueue is Full!!");
-        printf("\nChar not popped!!");
-        return;
-    }
-    if(pos==-1)
-    {
-        printf("\nStack is Empty!!");
-        return;
-    }
-    if(front==-1&&rear==-1)
-    {
-        front=rear=0;
-        queue[rear]=stack[pos--];
+        printf("\nEmpty!!");
     }
     else
     {
-        rear=(rear+1)%N;
-        queue[rear]=stack[pos--];
+        printf("\nDeleted Element is %c",stack[top]);
+        top=top-1;
     }
 }
 
 void disp()
 {
-    if(pos==-1&&rear==-1)
+    if(top==-1)
     {
-        printf(("\nEmpty!!"));
-        return;
+        printf("\nStack is Empty!!");
     }
-    printf("\nStack : ");
-    for(int i=0;i<=pos;i++)
+    else
     {
-        printf("\t%d",stack[i]);
-    }
-    printf("\nQueue : ");
-    for(int i=front;i<=rear;i++)
-    {
-        printf("\t%d",queue[i]);
+        for(int i=0;i<=top;i++)
+        {
+            printf("\t %c",stack[i]);
+        }
     }
 }
 
@@ -80,7 +61,6 @@ int main()
     do
     {
         menu();
-        printf("\nSelect Menu Option        ");
         scanf("%d",&opt);
         switch(opt)
         {
@@ -94,11 +74,10 @@ int main()
             disp();
             break;
             case 4:
-            exit(0);
+            break;
             default:
-            printf("\nINvalid Menu Option");
+            printf("\nInvalid Menu Option !!");
         }
-    }while (opt!=4);
-
+    }while(opt!=4);
     return 0;
 }
