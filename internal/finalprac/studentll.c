@@ -7,7 +7,7 @@ struct student
     int rno,total;
     char name[10];
     struct student *next;
-}*f=NULL,*l=NULL,*temp;
+}*f=NULL,*l=NULL,*temp,*p;
 
 void menu()
 {
@@ -90,6 +90,69 @@ void dispc()
     }
 }
 
+void delete()
+{
+    if(f==NULL&&l==NULL)
+    {
+        printf("\nList is Empty!!");
+    }
+    else
+    {
+        int x,ck=0;
+        printf("\nEnter Roll no to delete   ");
+        scanf("%d",&x);
+
+        if(f->rno==x)
+        {
+            ck=1;
+            temp=f;
+            printf("\nDeleted Info Details  :   ");
+            printf("\nROLL NO   =   %d",temp->rno);
+            printf("\nNAME      =   %s",temp->name);
+            printf("\nTOTAL     =   %d",temp->total);
+            f=f->next;
+            free(temp);
+        }
+        else if(l->rno==x)
+        {
+            ck=1;
+            temp=l;
+            printf("\nDeleted Info Details  :   ");
+            printf("\nROLL NO   =   %d",temp->rno);
+            printf("\nNAME      =   %s",temp->name);
+            printf("\nTOTAL     =   %d",temp->total);
+            for(temp=f;temp->next!=l;temp=temp->name);
+            free(temp->next);
+            temp->next=NULL;
+            l=temp;
+        }
+        else
+        {
+            for(temp=f;temp!=NULL;temp=temp->next)
+            {
+                if(temp->rno==x)
+                {
+                    printf("\nDeleted Info Details  :   ");
+                    printf("\nROLL NO   =   %d",temp->rno);
+                    printf("\nNAME      =   %s",temp->name);
+                    printf("\nTOTAL     =   %d",temp->total);
+
+                    p->next=temp->next;
+                    free(temp);
+                    ck=1;
+                    break;
+                }
+                p=temp;
+            }
+            if(ck==0)
+            {
+                printf("\nRoll no not  found!!");
+            }
+        }
+
+    }
+}
+
 
 int main()
 {
@@ -104,6 +167,9 @@ int main()
         {
             case 1:
             create();
+            break;
+            case 2:
+            delete();
             break;
             case 3:
             disp();
