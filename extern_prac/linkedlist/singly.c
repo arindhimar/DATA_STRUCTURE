@@ -21,6 +21,7 @@ void menu()
     printf("\n6 - Delete by Position Number");
     printf("\n7 - Display");
     printf("\n8 - Exit");
+    printf("\n9 - Sort");
 }
 
 void insertfirst()
@@ -57,6 +58,37 @@ void insertlast()
         l->next=temp;
         l=temp;
     }
+}
+
+void sort()
+{
+    if(f==NULL)
+    {
+        printf("\nEmpty!!");
+    }
+    else if (f==l)
+    {
+        printf("\nSorted!!");
+    }
+    else
+    {
+        int opt;
+        struct node *p,*c;
+        for(c=f;c!=NULL;c=c->next)
+        {
+            for(p=c->next;p!=NULL;p=p->next)
+            {
+                if(c->data>p->data)
+                {
+                    opt=c->data;
+                    c->data=p->data;
+                    p->data=opt;
+                }
+            }
+        }
+        printf("\nSorted!!");
+    }
+    
 }
 
 void insertpos()
@@ -245,6 +277,10 @@ int main()
             break;
             case 8:
             exit(0);
+            break;
+            case 9:
+            sort();
+            break;
             default:
             printf("\nInvalid Menu Option!");
         }
