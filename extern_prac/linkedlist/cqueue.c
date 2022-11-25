@@ -1,6 +1,6 @@
 #include<stdio.h>
 #include<stdlib.h>
-#define size 4
+#define size 3
 
 int queue[size],f=-1,r=-1;
 

@@ -1,0 +1,1 @@
+printf("\nAt:%s",stack[0]);
